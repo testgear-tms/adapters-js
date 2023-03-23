@@ -1,4 +1,4 @@
-import { AutotestPost } from 'testgear-api-client';
+import { AutoTestModelV2GetModel, AutoTestPostModel } from 'testgear-api-client';
 import { Box } from '../common/classes/box.class';
 import { Logger } from '../common/classes/logger.class';
 import { isPassed } from '../common/functions/is-passed.function';
@@ -50,7 +50,9 @@ export abstract class BaseStrategy {
     }
   }
 
-  protected async createTestInOriginSystem(testToOriginSystem: AutotestPost, test: Codecept.Test) {
+  protected async createTestInOriginSystem(testToOriginSystem: AutoTestPostModel, test: Codecept.Test) {
+    testToOriginSystem.shouldCreateWorkItem = this.config.automaticCreationTestCases;
+
     const response = await this.http.create(testToOriginSystem);
 
     if (!response) {
@@ -62,8 +64,8 @@ export abstract class BaseStrategy {
   }
 
   protected async updateTestInOriginSystem(
-    fromOriginSystem: AutotestPost,
-    testToOriginSystem: AutotestPost,
+    fromOriginSystem: AutoTestModelV2GetModel,
+    testToOriginSystem: AutoTestPostModel,
     test: Codecept.Test
   ) {
     const hasPassedState = isPassed(test);
@@ -77,6 +79,9 @@ export abstract class BaseStrategy {
     if (!hasPassedState) {
       await this.http.update({
         ...fromOriginSystem,
+        externalId: fromOriginSystem.externalId,
+        projectId: fromOriginSystem.projectId,
+        name: fromOriginSystem.name,
         links: config?.links ?? []
       });
 

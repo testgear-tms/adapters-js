@@ -216,6 +216,7 @@ export class TestGearFormatter extends Formatter implements IFormatter {
   async createNewAutotest(
     autotestPost: AutotestPostWithWorkItemId
   ): Promise<void> {
+    autotestPost.automaticCreationTestCases = this.client.getConfig().automaticCreationTestCases;
     await this.client.createAutotest(autotestPost);
   }
 

@@ -5,10 +5,10 @@
 
 ### Compatibility
 
-| Test Gear | Adapter |
-|---------|---------|
-| 3.5     | 1.0     |
-| 4.0     | 1.1     |
+| TestGear | Adapter |
+|----------|---------|
+| 3.5      | 1.0     |
+| 4.0      | 1.1     |
 
 ### Installation
 ```

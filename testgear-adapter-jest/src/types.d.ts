@@ -1,4 +1,4 @@
-import { LinkPost } from 'testgear-api-client';
+import { LinkPost } from './types';
 
 declare global {
   const testgear: {

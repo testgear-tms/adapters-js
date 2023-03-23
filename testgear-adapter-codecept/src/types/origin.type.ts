@@ -1,4 +1,3 @@
-import { LinkPost } from 'testgear-api-client';
 import { AdapterMode } from '../strategies/strategy.factory';
 
 export namespace Origin {
@@ -24,6 +23,22 @@ export namespace Origin {
     text?: TestText
   }
 
+  export interface LinkPost {
+    title?: string;
+    url: string;
+    description?: string;
+    type?: LinkType;
+    hasInfo?: boolean;
+  }
+  
+  export type LinkType =
+  | 'Related'
+  | 'BlockedBy'
+  | 'Defect'
+  | 'Issue'
+  | 'Requirement'
+  | 'Repository';
+
   export interface Config {
     url?: string
     privateToken?: string,
@@ -32,6 +47,8 @@ export namespace Origin {
     testRunId?: string,
     testRunName?: string,
     adapterMode?: AdapterMode;
+    automaticCreationTestCases?: boolean;
+    certValidation?: boolean;
     configFile?: string,
     __DEV?: boolean
   }
@@ -44,6 +61,8 @@ export namespace Origin {
     TMS_TEST_RUN_ID: string,
     TMS_TEST_RUN_NAME: string,
     TMS_ADAPTER_MODE: AdapterMode,
+    TMS_AUTOMATIC_CREATION_TEST_CASES: boolean,
+    TMS_CERT_VALIDATION: boolean,
     TMS_CONFIG_FILE: string,
   }>
 }
