@@ -3,13 +3,6 @@
 
 ## Getting Started
 
-### Compatibility
-
-| TestGear | Adapter |
-|----------|---------|
-| 3.5      | 1.0     |
-| 4.0      | 1.1     |
-
 ### Installation
 ```
 npm install testgear-adapter-jest
