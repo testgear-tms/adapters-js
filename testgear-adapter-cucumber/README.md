@@ -1,14 +1,7 @@
-# Test Gear TMS adapters for Cucumber
-![Test Gear](https://raw.githubusercontent.com/testgear-tms/adapters-js/master/images/banner.png)
+# TestGear TMS adapters for Cucumber
+![TestGear](https://raw.githubusercontent.com/testgear-tms/adapters-js/master/images/banner.png)
 
 ## Getting Started
-
-### Compatibility
-
-| TestGear | Adapter |
-|----------|---------|
-| 3.5      | 1.0     |
-| 4.0      | 1.1     |
 
 ### Installation
 ```
