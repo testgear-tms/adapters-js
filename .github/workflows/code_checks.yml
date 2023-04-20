@@ -81,7 +81,8 @@ jobs:
       - name: Install dependecies
         working-directory: ${{ matrix.package }}
         run: npm install
-      - working-directory: ${{ matrix.package }}
+      - name: Install typescript
+        working-directory: ${{ matrix.package }}
         run: npm install -g typescript
       - name: Build application ${{ matrix.package }}
         working-directory: ${{ matrix.package }}
