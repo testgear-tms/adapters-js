@@ -22,11 +22,22 @@ jobs:
       - name: Install Node JS
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: ${{ matrix.node-version }}
           registry-url: 'https://registry.npmjs.org'
+      - name: Cache deps
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependecies
         working-directory: ${{ matrix.package }}
         run: npm install
+      - name: Install typescript
+        working-directory: ${{ matrix.package }}
+        run: npm install -g typescript
+      - name: Build application ${{ matrix.package }}
+        working-directory: ${{ matrix.package }}
+        run: npm run build
       - run: npm publish
         working-directory: ${{ matrix.package }}
         env:
