@@ -1,0 +1,44 @@
+name: Publish Package
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [18]
+        package: [
+            testgear-adapter-codecept,
+            testgear-adapter-cucumber,
+            testgear-adapter-jest
+        ]
+    steps:
+      - name: Get repository code [${{ matrix.package }}]
+        uses: actions/checkout@v3
+      - name: Install Node JS
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          registry-url: 'https://registry.npmjs.org'
+      - name: Cache deps
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: node-modules-${{ hashFiles('**/package-lock.json') }}
+      - name: Install dependecies
+        working-directory: ${{ matrix.package }}
+        run: npm install
+      - name: Install typescript
+        working-directory: ${{ matrix.package }}
+        run: npm install -g typescript
+      - name: Build application ${{ matrix.package }}
+        working-directory: ${{ matrix.package }}
+        run: npm run build
+      - run: npm publish
+        working-directory: ${{ matrix.package }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
